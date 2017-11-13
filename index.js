@@ -1,18 +1,22 @@
-const promisify = require('util.promisify')
-
-function promisifyAll(target, suffix = 'Async') {
-  Object.getOwnPropertyNames(target.prototype).forEach(key => {
-    var descriptor = Object.getOwnPropertyDescriptor(target, key);
-
-    if (typeof descriptor.value !== 'function' || key === 'constructor')
-      return;
-    console.log(key);
-
-    var promisifiedKey = key + suffix;
-    target[promisifiedKey] = promisify(target[key]);
+export default promisify = (func) => (...args) => {
+  return new Promise((resolve, reject) => {
+    let callback = (err, data) => err ? reject(err) : resolve(data);
+    func.apply(func.prototype, [...args, callback]);
   });
-
-  return target; // Not necessary
 }
 
-export {promisify, promisifyAll};
+function promisifyClass(target, suffix = 'Async') {
+  target = target.prototype;
+  Object.getOwnPropertyNames(target).forEach(key => {
+    let descriptor = Object.getOwnPropertyDescriptor(target, key);
+
+    if (!descriptor || typeof descriptor.value !== 'function'
+      || key === 'constructor' || key.startsWith('_'))
+      return;
+
+    let promisifiedKey = key + suffix;
+    target[promisifiedKey] = promisify(target[key]);
+  });
+}
+
+export {promisify, promisifyClass};

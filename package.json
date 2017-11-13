@@ -7,7 +7,5 @@
   },
   "license": "MIT",
   "dependencies": {
-    "util": "^0.10.3",
-    "util.promisify": "^1.0.0"
   }
 }
