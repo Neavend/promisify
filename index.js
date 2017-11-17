@@ -1,9 +1,4 @@
-export default promisify = (func) => (...args) => {
-  return new Promise((resolve, reject) => {
-    let callback = (err, data) => err ? reject(err) : resolve(data);
-    func.apply(func.prototype, [...args, callback]);
-  });
-}
+const promisify = require('util.promisify')
 
 function promisifyClass(target, suffix = 'Async') {
   target = target.prototype;
