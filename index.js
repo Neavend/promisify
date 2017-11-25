@@ -1,4 +1,4 @@
-const promisify = require('util.promisify')
+import promisify from './implementation';
 
 function promisifyClass(target, suffix = 'Async') {
   target = target.prototype;
@@ -14,4 +14,5 @@ function promisifyClass(target, suffix = 'Async') {
   });
 }
 
+export default promisify;
 export {promisify, promisifyClass};

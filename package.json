@@ -1,11 +1,9 @@
 {
   "name": "promisify",
-  "version": "1.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/neavend/promisify"
   },
-  "license": "MIT",
-  "dependencies": {
-  }
+  "license": "MIT"
 }
