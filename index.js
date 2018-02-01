@@ -1,7 +1,8 @@
 import promisify from './implementation';
 
 function promisifyClass(target, suffix = 'Async') {
-  target = target.prototype;
+  target = target.prototype || target;
+
   Object.getOwnPropertyNames(target).forEach(key => {
     let descriptor = Object.getOwnPropertyDescriptor(target, key);
 
